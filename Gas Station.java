@@ -21,3 +21,19 @@ class Solution {
         return res;
     }
 }
+
+// Alternate
+class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int res=0; int curAmount=0; int total=0;
+        for(int i=0; i<gas.length; i++){
+            total+=gas[i]-cost[i];
+            curAmount+=gas[i]-cost[i];
+            if(curAmount<0){
+                curAmount=0; res=i+1;
+            }
+        }
+        if(total<0 || res==gas.length) return -1;
+        return res;
+    }
+}
