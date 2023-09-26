@@ -1,0 +1,25 @@
+class Solution {
+    // Function to detect cycle in a directed graph.
+    boolean DFSRec(ArrayList<ArrayList<Integer>> adj, int s, boolean []visited, boolean recSt[]){
+        visited[s] = true;
+        recSt[s] = true;
+        for(int adjacent: adj.get(s)){
+            if(!visited[adjacent]){
+                if(DFSRec(adj,adjacent,visited,recSt)) return true;
+            }else if(recSt[adjacent]) return true;
+        }
+        recSt[s] = false;
+        return false;
+    }
+    public boolean isCyclic(int v, ArrayList<ArrayList<Integer>> adj) {
+        // code here
+        boolean visited[] = new boolean[v];
+        boolean recSt[] = new boolean[v];
+        for(int i=0; i<v; i++){
+            if(!visited[i]){
+                if(DFSRec(adj,i,visited,recSt)) return true;
+            }
+        }
+        return false;
+    }
+}
